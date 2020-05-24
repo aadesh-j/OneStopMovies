@@ -30,24 +30,27 @@
 <?php
 
 
-$name = $name_error = "";
+$userdetail = $userdetail_error = "";
 $email = $email_error =  "";
 $number = $number_error = "";
+$messagearea = $messagearea_error = "";
+$complaintstype_error ="";
+$complaintstype = $_POST["complaintstype"];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
-  if (empty($_POST["name"])) 
+  if (empty($_POST["userdetail"])) 
   {
-    $name_error = "Name is required";
+    $userdetail_error = "Name is required";
   } 
 
   else 
   {
-    $name = test_input($_POST["name"]);
+    $name = test_input($_POST["userdetail"]);
     
-    if (!preg_match("/^[a-zA-Z ]*$/",$name)) 
+    if (!preg_match("/^[a-zA-Z ]*$/",$userdetail)) 
     {
-      $name_error = "Please use letters only!";
+      $userdetail_error = "Please use letters only!";
     }
   }
   
@@ -68,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     
   if (empty($_POST["number"])) 
   {
-    $number = "";
+    $number_error = "Number is required";
   } 
 
   else 
@@ -80,6 +83,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
       $number_error = "Invalid Number";
     }
   }
+
+  if (empty($_POST["messagearea"])) 
+  {
+    $messagearea_error = "Complaint is required";
+  }
+
+  if($complaintstype =="none")
+  {
+    $complaintstype_error ="Complaint type is required";
+  }
+
+  
 }
 
 function test_input($data) {
@@ -94,9 +109,9 @@ function test_input($data) {
 <p><span class="error">* Important fields</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-  Name: <span class="error">*</span> <input type="text" name="name" placeholder="John Doe" value="<?php echo $name;?> ">
-  <span class="error"><?php echo $name_error;?></span>
-  <br><br>
+  Name: <span class="error">*</span> <input type="text" name="userdetail" placeholder="peter" value="<?php echo $userdetail;?>">
+  <span class="error"><?php echo $userdetail_error;?></span>
+  <br><br>  
 
   E-mail: <span class="error">*</span> <input type="text" name="email" placeholder="someone@example.com" value="<?php echo $email;?>">
   <span class="error"><?php echo $email_error;?></span>
@@ -106,9 +121,25 @@ function test_input($data) {
   <span class="error"><?php echo $number_error;?></span>
   <br><br>
 
+Select the type of Complaint:
+  <select name="complaintstype" id="complaintstype">  
+    <option value="none" selected="selected">Select an option</option>
+    <option value="Service">Service</option>
+    <option value="Price">Price</option>
+    <option value="Refund">Refund</option>
+  </select>
+  <span class="error"><?php echo$complaintstype_error;?></span>
+  <br><br>  
+
+   
+  Please Enter your complaint here.<textarea id="messagearea" rows="5" cols="50" value="<?php echo $messagearea;?>"></textarea>  
+  <span class="error"><?php echo $messagearea_error;?></span>
+  <br><br>
   <input type="submit" name="submit" value="Submit">  
+  <button class="button" type="reset" id="cancel" onclick="location.href='product.php';"" value="Go to home page">Cancel Complaint</button>
 </form>
 </div>
+
 
 
 </body>
