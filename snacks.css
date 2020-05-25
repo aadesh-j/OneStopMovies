@@ -1,0 +1,45 @@
+
+
+#drinkswrapper {
+  display: flex;
+}
+
+
+
+#drinktype {
+  flex: 0 0 65%;
+  margin-left: 3%;
+}
+
+#drinksize {
+  flex: 1;
+  margin-left: -55em;
+}
+
+
+
+/*
+#drinktype{
+ display : inline;
+
+}
+*/
+
+
+/*
+/*
+ #rightbox{ 
+     float:right; 
+     background:blue; 
+     width:25%; 
+     height:280px; 
+ } 
+width:25%; 
+     height:280px; 
+
+     width:50%; 
+     height:280px; 
+
+
+ */
+
